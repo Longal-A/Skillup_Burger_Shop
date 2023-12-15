@@ -1,69 +1,86 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import burger1 from "../../assets/burger1.png";
 import burger2 from "../../assets/burger2.png";
-// import burger3 here
-
-const CartItem = ({ value, title, img, increment, decrement }) => (
-  <div className="cartItem">
-    <div>
-      <h4>{title}</h4>
-      <img src={img} alt="Item" />
-    </div>
-
-    <div>
-      <button onClick={decrement}>-</button>
-      <input type="number" readOnly value={value} />
-      <button onClick={increment}>+</button>
-    </div>
-  </div>
-);
+import burger3 from "../../assets/burger3.png";
+import CartItem from "./CartItem";
 
 const Cart = () => {
-  const increment = (item) => {};
+  const [itemQuantities, setItemQuantities] = useState({
+    1: 0, // Cheese Burger
+    2: 0, // Veg Cheese Burger
+    3: 0, // Cheese Burger with French Fries
+  });
 
-  const decrement = (item) => {};
+  const itemPrices = {
+    1: 200, // Cheese Burger
+    2: 250, // Veg Cheese Burger
+    3: 300, // Cheese Burger with French Fries
+  };
+
+  const calculateSubtotal = () => {
+    return Object.keys(itemQuantities).reduce(
+      (subtotal, itemId) => subtotal + itemQuantities[itemId] * itemPrices[itemId],
+      0
+    );
+  };
+
+  const calculateTax = () => {
+    const subtotal = calculateSubtotal();
+    return subtotal * 0.18;
+  };
+
+  const calculateTotal = () => {
+    const subtotal = calculateSubtotal();
+    const tax = calculateTax();
+    const shippingCharges = 200;
+    return subtotal + tax + shippingCharges;
+  };
+
+  const increment = (itemId) => {
+    setItemQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [itemId]: prevQuantities[itemId] + 1,
+    }));
+  };
+
+  const decrement = (itemId) => {
+    setItemQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [itemId]: Math.max(0, prevQuantities[itemId] - 1),
+    }));
+  };
 
   return (
     <section className="cart">
       <main>
-        <CartItem
-          title={"Cheese Burger"}
-          img={burger1}
-          value={0}
-          increment={() => increment(1)}
-
-        // Add the function for decrementing the order by 1 
-       
-        />
-        <CartItem
-          title={"Veg Cheese Burger"}
-          img={burger2}
-          value={0}
-          increment={() => increment(2)}
-        // Add the function for decrementing the order by 2
-       
-        />
-
-        {/* Fill up the code for Cheese Burger similarly */}
-       
-
         <article>
+          {Object.keys(itemQuantities).map((itemId) => (
+            <CartItem
+              key={itemId}
+              title={`Item ${itemId}`}
+              img={burger1}
+              value={itemQuantities[itemId]}
+              increment={() => increment(itemId)}
+              decrement={() => decrement(itemId)}
+            />
+          ))}
+
           <div>
             <h4>Sub Total</h4>
-            <p>₹{2000}</p>
+            <p>₹{calculateSubtotal()}</p>
           </div>
           <div>
             <h4>Tax</h4>
-            <p>₹{2000 * 0.18}</p>
+            <p>₹{calculateTax()}</p>
           </div>
           <div>
             <h4>Shipping Charges</h4>
             <p>₹{200}</p>
-          </div>{" "}
+          </div>
           <div>
             <h4>Total</h4>
-            <p>₹{2000 + 2000 * 0.18 + 200}</p>
+            <p>₹{calculateTotal()}</p>
           </div>
           <Link to="/shipping">Checkout</Link>
         </article>

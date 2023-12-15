@@ -111,3 +111,19 @@
     }
   }
 }
+
+.about-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.about-text {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.founder-info {
+  flex: 1;
+}
