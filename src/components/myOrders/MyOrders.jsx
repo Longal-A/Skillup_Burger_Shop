@@ -27,6 +27,7 @@ const MyOrders = () => {
           </thead>
 
           <tbody>
+<<<<<<< HEAD
             {arr.map((order) => (
               <tr key={order.id}>
                 <td>{order.id}</td>
@@ -41,6 +42,22 @@ const MyOrders = () => {
                 </td>
               </tr>
             ))}
+=======
+          {arr.map((orderId) => (
+        <tr key={orderId}>
+          <td>{`#${orderId}`}</td>
+          <td>Processing</td>
+          <td>23</td>
+          <td>₹{2132}</td>
+          <td>COD</td>
+          <td>
+            <Link to={`/order/${orderId}`}>
+              <AiOutlineEye />
+            </Link>
+          </td>
+        </tr>
+      ))}
+>>>>>>> e30e399b013b7b0370951066c43d060ac03ad515
           </tbody>
         </table>
       </main>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { motion } from 'framer-motion';
 import Founder from './Founder';
@@ -30,4 +31,32 @@ const Home = () => {
   );
 };
 
+=======
+// Write all the code here
+import React from "react";
+import { motion } from "framer-motion";
+import Founder from "./Founder";
+import Menu from "./Menu";
+
+const Home = () => {
+    return (
+        <div className="home-container">
+            <motion.div
+            initial={{
+                x: "-100%",
+                opacity: 0,
+            }}
+            whileInView={{
+                x: 0,
+                opacity: 1,
+            }}
+        >
+            <Founder />
+            <Menu />
+            </motion.div>
+        </div>
+    );
+};
+
+>>>>>>> e30e399b013b7b0370951066c43d060ac03ad515
 export default Home;

@@ -20,9 +20,15 @@
 
 .menu-container {
   display: flex;
+<<<<<<< HEAD
   gap: 16px;
 }
 
+=======
+  gap: 26px;
+  justify-items: center;
+}
+>>>>>>> e30e399b013b7b0370951066c43d060ac03ad515
 .menuCard {
   background-color: white;
   width: 30%;
