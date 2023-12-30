@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Popup from 'reactjs-popup';
+import "../../styles/menu.scss";
 
 const MenuCard = ({ itemNum, burgerSrc, price, title, handler, delay = 0 }) => {
   return (

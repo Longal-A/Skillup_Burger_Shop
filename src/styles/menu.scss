@@ -18,6 +18,11 @@
   }
 }
 
+.menu-container {
+  display: flex;
+  gap: 16px;
+}
+
 .menuCard {
   background-color: white;
   width: 30%;
